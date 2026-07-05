@@ -164,8 +164,14 @@ function Hero() {
   );
 }
 
+const REVIEW_QUOTES = [
+  { text: "I literally won't go anywhere else to get my haircut — the barbers here are exceptional at what they do.", source: 'via Google' },
+  { text: "Very chill atmosphere, been going to Jeff for 2 years and he does quality work on my hair and beard.", source: 'via Yelp' },
+  { text: "Appreciate the owners' down-to-earth, laid-back personality — plus it's open weekends.", source: 'via Google' },
+];
+
 function Features() {
-  const [shuffleOrder, setShuffleOrder] = useState([0, 1, 2]);
+  const [shuffleOrder, setShuffleOrder] = useState(REVIEW_QUOTES.map((_, i) => i));
 
   return (
     <section id="features" className="bg-surface text-white py-24 md:py-32">
@@ -186,14 +192,12 @@ function Features() {
                 className="absolute inset-8 rounded-2xl bg-primary p-5 flex flex-col justify-between transition-all duration-500"
                 style={{
                   transform: `translateY(${pos * 10}px) scale(${1 - pos * 0.05})`,
-                  zIndex: 10 - pos,
-                  opacity: pos === 2 ? 0 : 1,
+                  zIndex: REVIEW_QUOTES.length - pos,
+                  opacity: pos === REVIEW_QUOTES.length - 1 ? 0 : 1,
                 }}
               >
-                <p className="font-flourish italic text-lg">
-                  {['"Best fade in West Seattle."', '"Feels like a real neighborhood shop."', '"Consistent, every single time."'][idx]}
-                </p>
-                <p className="text-xs text-white/60 font-mono">— Southpaw regular</p>
+                <p className="font-flourish italic text-lg">"{REVIEW_QUOTES[idx].text}"</p>
+                <p className="text-xs text-white/60 font-mono">— {REVIEW_QUOTES[idx].source}</p>
               </div>
             ))}
           </div>
